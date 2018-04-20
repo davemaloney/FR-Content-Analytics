@@ -6,7 +6,7 @@ A program to get pageview counts for blogs, press releases, and research papers 
 
 ### Check platform
 
-Ensure Python and Pip ar installed and available
+Ensure Python and Pip are installed and available
 
 ```shell
 $ which python
