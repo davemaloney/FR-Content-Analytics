@@ -25,7 +25,7 @@ $ bash analytics.sh
 ```
 
 ### API Key
-Make sure Google Analytics API Key is available at [secrets/client-secrets.json](secrets/client-secrets.json), or get a new key through the [Google API Console](https://console.developers.google.com/apis/credentials).
+Make sure Google Analytics API Key is available at [secrets/client-secrets.json](secrets/client-secrets.json), or get a new key through the [Google API Console](https://console.developers.google.com/apis/credentials). The named service account in the secrets file must be an authorized user of the **target view**, named in [GoogleAPI90Days.py](GoogleAPI90Days.py#L9)
 
 ## Get Started
 
