@@ -8,7 +8,7 @@
 
 import csv
 from GoogleAPI90Days import initialize_api, get_report, print_response
-from soup import word_count, blog_word_count, get_date
+from soup import word_count, blog_word_count, get_date, get_tags
 
 def main(page_key):
     """Uses Pages.csv to create Performance.csv
@@ -36,15 +36,32 @@ def main(page_key):
             date = get_date(url)
 
             # ANALYTICS
-            response = get_report(analytics, page, date)
+            analytics_data = get_report(analytics, page, date)
+            analytics_formatted = print_response(analytics_data)
 
-            page_data = print_response(response)
-            page_data.insert(0, page)
-            page_data.insert(1, date)
+            page_data = analytics_formatted['pageviews']
+            page_time = analytics_formatted['time']
+
+            # TAGS
+            # page_tags = get_tags(url)
+            page_tags = ', '.join(get_tags(url))
+
+            # WORD COUNT
             if page_key == 'blog':
-                page_data.insert(2, blog_word_count(url))
+                page_wordcount = blog_word_count(url)
             else:
-                page_data.insert(2, word_count(url))
+                page_wordcount = word_count(url)
+
+            # Insert the URL at postion 0
+            page_data.insert(0, page)
+            # Insert the date at position 1
+            page_data.insert(1, date)
+            # Insert the tags at position 2
+            page_data.insert(2, page_tags)
+            # Insert the time at position 3
+            page_data.insert(3, page_time)
+            # Insert the wordcount at postion 4
+            page_data.insert(4, page_wordcount)
 
             pages.append((page_data))
 
@@ -53,6 +70,8 @@ def main(page_key):
         writer.writerow([
             "URL",
             "Published Date",
+            "Tags",
+            "Average Time Spent",
             "Word Count"
         ])
         for page in pages:

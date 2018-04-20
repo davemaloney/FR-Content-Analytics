@@ -71,3 +71,22 @@ def get_date(url):
     )['content'].split('T')[0]
 
     return blog_date
+
+
+def get_tags(url):
+    """Get the tags from a tag in the form of
+        <meta property="idio:topic" content="Topic">
+    Args:
+        url: a fully-qualified URL
+    """
+    blog_tags = soup(url).find_all(
+        'meta',
+        attrs={'property': 'idio:topic'}
+    )
+    tags = []
+    for tag in blog_tags:
+        tags.append((tag['content']))
+
+    tags.sort()
+
+    return tags

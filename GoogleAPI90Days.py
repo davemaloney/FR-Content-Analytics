@@ -39,7 +39,10 @@ def get_report(analytics, page, date):
             'reportRequests': [{
                 'viewId': VIEW_ID,
                 'dateRanges': [{'startDate': date, 'endDate': 'today'}],
-                'metrics': [{'expression': 'ga:pageviews'}],
+                'metrics': [
+                    {'expression': 'ga:pageviews'},
+                    {'expression': 'ga:avgTimeOnPage'}
+                ],
                 'dimensions': [{
                     'name': 'ga:pagePath',
                     'name': 'ga:date'
@@ -77,4 +80,11 @@ def print_response(response):
             value = values.get('values')[0]
             pageviews.append(value)
 
-    return pageviews
+    time = response.get('reports', [])[0].get('data', {}).get('totals', [])[0].get('values', [])[1]
+
+    response = {
+        'pageviews': pageviews,
+        'time': time
+    }
+
+    return response
