@@ -7,6 +7,8 @@
 """
 
 import csv
+import os
+import errno
 from soup import soup
 
 def get_pages(page):
@@ -16,6 +18,13 @@ def get_pages(page):
 
     filename = 'csv/' + page + 'Pages.csv'
     print(filename)
+
+    if not os.path.exists(os.path.dirname(filename)):
+        try:
+            os.makedirs(os.path.dirname(filename))
+        except OSError as exc:  # Guard against race condition
+            if exc.errno != errno.EEXIST:
+                raise
 
     with open(filename, 'w') as csv_file:
         writer = csv.writer(csv_file)
