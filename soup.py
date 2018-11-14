@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import nltk
 
+
 def soup(url):
     """Make the soup
     Args:
@@ -26,7 +27,8 @@ def blog_word_count(url):
         url: a fully-qualified URL
     """
     # isolate the blog content from the soup
-    blog_content = soup(url).find('div', attrs={'class': 'post-body'}).text.strip()
+    blog_content = soup(url).find(
+        'div', attrs={'class': 'post-body'}).text.strip()
     # trim the blog content at `London Stock Exchange Group plc`
     blog_trimmed = blog_content.split("London Stock Exchange Group plc")[0]
     tokens = nltk.word_tokenize(blog_trimmed)

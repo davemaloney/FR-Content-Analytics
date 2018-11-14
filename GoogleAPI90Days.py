@@ -80,7 +80,8 @@ def print_response(response):
             value = values.get('values')[0]
             pageviews.append(value)
 
-    time = response.get('reports', [])[0].get('data', {}).get('totals', [])[0].get('values', [])[1]
+    time = response.get('reports', [])[0].get(
+        'data', {}).get('totals', [])[0].get('values', [])[1]
 
     response = {
         'pageviews': pageviews,

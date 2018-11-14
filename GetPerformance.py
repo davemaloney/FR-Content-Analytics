@@ -10,6 +10,7 @@ import csv
 from GoogleAPI90Days import initialize_api, get_report, print_response
 from soup import word_count, blog_word_count, get_date, get_tags
 
+
 def main(page_key):
     """Uses Pages.csv to create Performance.csv
 
@@ -77,14 +78,17 @@ def main(page_key):
         for page in pages:
             writer.writerow(page)
 
+
 def getopts(arg):
     """taken from https://gist.github.com/dideler/2395703"""
     opts = {}  # Empty dictionary to store key-value pairs.
     while arg:  # While there are arguments left to parse...
         if arg[0][0] == '-':  # Found a "-name value" pair.
             opts[arg[0]] = arg[1]  # Add key and value to the dictionary.
-        arg = arg[1:]  # Reduce the argument list by copying it starting from index 1.
+        # Reduce the argument list by copying it starting from index 1.
+        arg = arg[1:]
     return opts
+
 
 if __name__ == '__main__':
     from sys import argv

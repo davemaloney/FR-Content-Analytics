@@ -15,7 +15,6 @@ $ which pip
 usr/bin/pip
 ```
 
-
 ### Install dependencies
 
 Install `requests`, `BeautifulSoup4`, `nltk`, `google-api-python-client` to the `user` account.
@@ -25,6 +24,7 @@ $ bash analytics.sh
 ```
 
 ### API Key
+
 Make sure Google Analytics API Key is available at [secrets/client-secrets.json](secrets/client-secrets.json), or get a new key through the [Google API Console](https://console.developers.google.com/apis/credentials). The named service account in the secrets file must be an authorized user of the **target view**, named in [GoogleAPI90Days.py](GoogleAPI90Days.py#L9)
 
 ## Get Started
@@ -48,6 +48,7 @@ $ python GetPerformance.py -i research
 ```
 
 Creates
+
 - [csv/blogPerformance.csv](csv/blogPerformance.csv)
 - [csv/press-releasePerformance.csv](csv/press-releasePerformance.csv)
 - [csv/researchPerformance.csv](csv/researchPerformance.csv)
