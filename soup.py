@@ -1,6 +1,7 @@
 """Beautiful Soup Commands"""
 
 import re
+import json
 import requests
 from bs4 import BeautifulSoup
 import nltk
@@ -92,3 +93,41 @@ def get_tags(url):
     tags.sort()
 
     return tags
+
+
+def get_index_content(url):
+    """Get the content from the JSON of an index page
+        {
+            familyData: {
+                Description: 'Index Family Description',
+                FamilyName: 'Family Name'
+            },
+            familyName: 'Family Name'
+        }
+    Args:
+        url: a fully-qualified JSON endpoint
+    Returns:
+        ['<html tagged content>','Plain text content','Title']
+    """
+    index_page = requests.get(url, headers={'User-Agent': "Magic Browser"})
+    index_page_text = index_page.text.encode('utf-8').decode('ascii', 'ignore')
+    parsed_json = json.loads(index_page_text)['familyData']['Description']
+    parsed_title = json.loads(index_page_text)['familyName']
+
+    title = BeautifulSoup(parsed_title, 'html.parser')
+    htmlContent = BeautifulSoup(parsed_json, 'html.parser')
+
+    plainText = BeautifulSoup(parsed_json, 'html.parser').findAll(text=True)
+
+    noTabs = []
+    for item in plainText:
+        noTabs.append(item.replace('\t', '').replace('\r\n', ''))
+
+    noTabsString = (' ').join(noTabs)
+
+    content = []
+    content.append(htmlContent)
+    content.append(noTabsString)
+    content.append(title)
+
+    return content

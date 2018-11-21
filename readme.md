@@ -52,3 +52,11 @@ Creates
 - [csv/blogPerformance.csv](csv/blogPerformance.csv)
 - [csv/press-releasePerformance.csv](csv/press-releasePerformance.csv)
 - [csv/researchPerformance.csv](csv/researchPerformance.csv)
+
+### Get Index Page Content
+
+```shell
+$ python GetIndexContent.py
+```
+
+Takes a list from [csv/indexPages.csv](csv/indexPages.csv) and produces [csv/indexContent.csv](csv/indexContent.csv)
