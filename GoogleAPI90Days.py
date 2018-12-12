@@ -53,6 +53,20 @@ def get_report(analytics, page, date):
                         'operator': 'REGEXP',
                         'expressions': page
                     }]
+                    # }, {
+                    #     'filters': [{
+                    #         'dimensionName': 'ga:dimension3',
+                    #         'not': True,
+                    #         'operator': 'REGEXP',
+                    #         'expressions': 'msci|london stock|ftse|s & p global'
+                    #     }]
+                }, {
+                    'filters': [{
+                        'dimensionName': 'ga:networkLocation',
+                        'not': True,
+                        'operator': 'REGEXP',
+                        'expressions': 'msci|london stock|s&p global'
+                    }]
                 }],
                 'includeEmptyRows': 'true',
                 'pageSize': 90
