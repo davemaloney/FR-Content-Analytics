@@ -110,7 +110,8 @@ def get_index_content(url):
         ['<html tagged content>','Plain text content','Title']
     """
     index_page = requests.get(url, headers={'User-Agent': "Magic Browser"})
-    index_page_text = index_page.text.encode('utf-8').decode('ascii', 'ignore')
+    # index_page_text = index_page.text.encode('utf-8').decode('ascii', 'ignore')
+    index_page_text = index_page.text.encode('ascii', 'ignore')
     parsed_json = json.loads(index_page_text)['familyData']['Description']
     parsed_title = json.loads(index_page_text)['familyName']
 

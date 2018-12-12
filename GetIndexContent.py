@@ -4,7 +4,7 @@
     $ python GetIndexContent.py
 """
 
-import csv
+import unicodecsv as csv
 from soup import get_index_content
 
 
