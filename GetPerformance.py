@@ -24,7 +24,16 @@ def main(page_key):
     output_file = 'csv/' + page_key + 'Performance.csv'
     analytics = initialize_api()
 
-    pages = []
+    # Clear out any old CSV and write in the header row
+    with open(output_file, 'w') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow([
+            "URL",
+            "Published Date",
+            "Tags",
+            "Average Time Spent",
+            "Word Count"
+        ])
 
     with open(input_file, 'rb') as csvfile:
         pageslist = csv.reader(csvfile)
@@ -64,19 +73,10 @@ def main(page_key):
             # Insert the wordcount at postion 4
             page_data.insert(4, page_wordcount)
 
-            pages.append((page_data))
-
-    with open(output_file, 'w') as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow([
-            "URL",
-            "Published Date",
-            "Tags",
-            "Average Time Spent",
-            "Word Count"
-        ])
-        for page in pages:
-            writer.writerow(page)
+            # Write the data into the CSV
+            with open(output_file, 'a') as csv_file:
+                writer = csv.writer(csv_file)
+                writer.writerow(page_data)
 
 
 def getopts(arg):
